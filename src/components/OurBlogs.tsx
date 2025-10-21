@@ -95,85 +95,96 @@ export const OurBlogs = () => {
           </p>
         </div>
 
-        {/* Responsive Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {blogs.map((blog) => (
-            <Card key={blog.id} className="group bg-card border border-border/60 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
-              {/* Image Section */}
-              <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-                <img
-                  src={blog.image}
-                  alt={blog.title}
-                  loading="lazy" 
-                  decoding="async" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  onError={(e) => {
-                    console.error(`Failed to load blog image: ${blog.image}`);
-                    (e.currentTarget as HTMLImageElement).src = '/placeholder.svg';
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                
-                {/* Category and Featured Badges */}
-                <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
-                  <span className="px-3 py-1 text-xs font-semibold bg-primary text-primary-foreground rounded-full">
-                    {blog.category}
-                  </span>
-                  {blog.featured && (
-                    <span className="px-3 py-1 text-xs font-semibold bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-full animate-pulse">
-                      Featured
-                    </span>
-                  )}
-                </div>
-
-                {/* Blog Title Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2 line-clamp-2">
-                    {blog.title}
-                  </h3>
-                </div>
-              </div>
-
-              {/* Content Section */}
-              <div className="p-4 sm:p-6">
-                {/* Author and Date */}
-                <div className="flex items-center justify-between text-sm text-muted-foreground mb-3">
-                  <div className="flex items-center">
-                    <User className="h-4 w-4 mr-2 text-primary" />
-                    <span>{blog.author}</span>
-                  </div>
-                  <div className="flex items-center">
-                    <Calendar className="h-4 w-4 mr-1" />
-                    <span>{blog.date}</span>
-                  </div>
-                </div>
-
-                {/* Excerpt */}
-                <p className="text-sm sm:text-base text-muted-foreground mb-4 line-clamp-3 leading-relaxed">
-                  {blog.excerpt}
-                </p>
-
-                {/* Stats and Read More */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4 text-sm text-muted-foreground">
-                    <div className="flex items-center">
-                      <Clock className="h-4 w-4 mr-1" />
-                      <span>{blog.readTime}</span>
+        {/* Horizontal Scrollable Layout */}
+        <div className="scroll-container">
+          <div className="flex overflow-x-auto scrollbar-hide horizontal-scroll gap-6 pb-4 snap-x snap-mandatory">
+            {blogs.map((blog) => (
+              <div key={blog.id} className="horizontal-card">
+                <Card className="group bg-card border border-border/60 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 h-full">
+                  {/* Image Section */}
+                  <div className="relative h-48 sm:h-56 overflow-hidden">
+                    <img
+                      src={blog.image}
+                      alt={blog.title}
+                      loading="lazy" 
+                      decoding="async" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        console.error(`Failed to load blog image: ${blog.image}`);
+                        (e.currentTarget as HTMLImageElement).src = '/placeholder.svg';
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    
+                    {/* Category and Featured Badges */}
+                    <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
+                      <span className="px-3 py-1 text-xs font-semibold bg-primary text-primary-foreground rounded-full">
+                        {blog.category}
+                      </span>
+                      {blog.featured && (
+                        <span className="px-3 py-1 text-xs font-semibold bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-full animate-pulse">
+                          Featured
+                        </span>
+                      )}
                     </div>
-                    <div className="flex items-center">
-                      <Eye className="h-4 w-4 mr-1" />
-                      <span>{blog.views}</span>
+
+                    {/* Blog Title Overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h3 className="text-lg sm:text-xl font-bold text-white mb-2 line-clamp-2">
+                        {blog.title}
+                      </h3>
                     </div>
                   </div>
-                  
-                  <button className="btn-glass group/btn flex items-center space-x-2 px-4 py-2 text-sm font-semibold">
-                    <span>Read More</span>
-                    <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                  </button>
-                </div>
+
+                  {/* Content Section */}
+                  <div className="p-4 sm:p-6">
+                    {/* Author and Date */}
+                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-3">
+                      <div className="flex items-center">
+                        <User className="h-4 w-4 mr-2 text-primary" />
+                        <span>{blog.author}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <Calendar className="h-4 w-4 mr-1" />
+                        <span>{blog.date}</span>
+                      </div>
+                    </div>
+
+                    {/* Excerpt */}
+                    <p className="text-sm sm:text-base text-muted-foreground mb-4 line-clamp-3 leading-relaxed">
+                      {blog.excerpt}
+                    </p>
+
+                    {/* Stats and Read More */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                        <div className="flex items-center">
+                          <Clock className="h-4 w-4 mr-1" />
+                          <span>{blog.readTime}</span>
+                        </div>
+                        <div className="flex items-center">
+                          <Eye className="h-4 w-4 mr-1" />
+                          <span>{blog.views}</span>
+                        </div>
+                      </div>
+                      
+                      <button className="btn-glass group/btn flex items-center space-x-2 px-4 py-2 text-sm font-semibold">
+                        <span>Read More</span>
+                        <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                      </button>
+                    </div>
+                  </div>
+                </Card>
               </div>
-            </Card>
-          ))}
+            ))}
+          </div>
+          
+          {/* Scroll indicators */}
+          <div className="flex justify-center mt-6 space-x-2">
+            {blogs.map((_, index) => (
+              <div key={index} className="scroll-indicator w-2 h-2 bg-primary/30 rounded-full"></div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

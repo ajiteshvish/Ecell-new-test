@@ -73,74 +73,85 @@ export const PastEvents = () => {
           </p>
         </div>
 
-        {/* Responsive Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {pastEvents.map((event) => (
-            <Card key={event.id} className="group bg-card border border-border/60 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
-              {/* Image Section */}
-              <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  loading="lazy" 
-                  decoding="async" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  onError={(e) => {
-                    console.error(`Failed to load event image: ${event.image}`);
-                    (e.currentTarget as HTMLImageElement).src = '/placeholder.svg';
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                
-                {/* Event Title Overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2">
-                    {event.title}
-                  </h3>
-                </div>
+        {/* Horizontal Scrollable Layout */}
+        <div className="scroll-container">
+          <div className="flex overflow-x-auto scrollbar-hide horizontal-scroll gap-6 pb-4 snap-x snap-mandatory">
+            {pastEvents.map((event) => (
+              <div key={event.id} className="horizontal-card">
+                <Card className="group bg-card border border-border/60 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 h-full">
+                  {/* Image Section */}
+                  <div className="relative h-48 sm:h-56 overflow-hidden">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      loading="lazy" 
+                      decoding="async" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={(e) => {
+                        console.error(`Failed to load event image: ${event.image}`);
+                        (e.currentTarget as HTMLImageElement).src = '/placeholder.svg';
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    
+                    {/* Event Title Overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h3 className="text-lg sm:text-xl font-bold text-white mb-2">
+                        {event.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Content Section */}
+                  <div className="p-4 sm:p-6">
+                    {/* Event Details */}
+                    <div className="space-y-3 mb-4">
+                      <div className="flex items-center text-sm text-muted-foreground">
+                        <Calendar className="h-4 w-4 mr-2 text-primary" />
+                        <span>{event.date}</span>
+                      </div>
+                      <div className="flex items-center text-sm text-muted-foreground">
+                        <MapPin className="h-4 w-4 mr-2 text-primary" />
+                        <span>{event.location}</span>
+                      </div>
+                      <div className="flex items-center text-sm text-muted-foreground">
+                        <Users className="h-4 w-4 mr-2 text-primary" />
+                        <span>{event.participants} participants</span>
+                      </div>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-sm sm:text-base text-muted-foreground mb-4 line-clamp-3 leading-relaxed">
+                      {event.description}
+                    </p>
+
+                    {/* Achievements */}
+                    <div className="space-y-2">
+                      <div className="flex items-center text-sm font-medium text-primary">
+                        <Award className="h-4 w-4 mr-2" />
+                        <span>Key Achievements</span>
+                      </div>
+                      <ul className="space-y-1">
+                        {event.achievements.slice(0, 2).map((achievement, index) => (
+                          <li key={index} className="text-xs sm:text-sm text-muted-foreground flex items-start">
+                            <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 mr-2 flex-shrink-0"></span>
+                            {achievement}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </Card>
               </div>
-
-              {/* Content Section */}
-              <div className="p-4 sm:p-6">
-                {/* Event Details */}
-                <div className="space-y-3 mb-4">
-                  <div className="flex items-center text-sm text-muted-foreground">
-                    <Calendar className="h-4 w-4 mr-2 text-primary" />
-                    <span>{event.date}</span>
-                  </div>
-                  <div className="flex items-center text-sm text-muted-foreground">
-                    <MapPin className="h-4 w-4 mr-2 text-primary" />
-                    <span>{event.location}</span>
-                  </div>
-                  <div className="flex items-center text-sm text-muted-foreground">
-                    <Users className="h-4 w-4 mr-2 text-primary" />
-                    <span>{event.participants} participants</span>
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p className="text-sm sm:text-base text-muted-foreground mb-4 line-clamp-3 leading-relaxed">
-                  {event.description}
-                </p>
-
-                {/* Achievements */}
-                <div className="space-y-2">
-                  <div className="flex items-center text-sm font-medium text-primary">
-                    <Award className="h-4 w-4 mr-2" />
-                    <span>Key Achievements</span>
-                  </div>
-                  <ul className="space-y-1">
-                    {event.achievements.slice(0, 2).map((achievement, index) => (
-                      <li key={index} className="text-xs sm:text-sm text-muted-foreground flex items-start">
-                        <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 mr-2 flex-shrink-0"></span>
-                        {achievement}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </Card>
-          ))}
+            ))}
+          </div>
+          
+          {/* Scroll indicators */}
+          <div className="flex justify-center mt-6 space-x-2">
+            {pastEvents.map((_, index) => (
+              <div key={index} className="scroll-indicator w-2 h-2 bg-primary/30 rounded-full"></div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

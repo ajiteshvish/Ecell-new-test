@@ -881,4 +881,84 @@ All colors MUST be HSL.
   .mobile-container-padding {
     @apply px-4 sm:px-6 lg:px-8;
   }
+
+  /* Horizontal scroll enhancements */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+  }
+
+  /* Smooth horizontal scrolling */
+  .horizontal-scroll {
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+  }
+
+  /* Enhanced snap scrolling */
+  .snap-center {
+    scroll-snap-align: center;
+  }
+
+  /* Scroll indicators animation */
+  .scroll-indicator {
+    @apply transition-all duration-300;
+  }
+
+  .scroll-indicator.active {
+    @apply bg-primary scale-110;
+  }
+
+  /* Touch-friendly horizontal scroll */
+  @media (hover: none) and (pointer: coarse) {
+    .horizontal-scroll {
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  /* Better mobile horizontal scroll */
+  .mobile-horizontal-scroll {
+    @apply overflow-x-auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .mobile-horizontal-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Card spacing for horizontal scroll */
+  .horizontal-card {
+    @apply flex-shrink-0 w-80 sm:w-96;
+    scroll-snap-align: center;
+  }
+
+  /* Enhanced scroll container */
+  .scroll-container {
+    @apply relative overflow-hidden;
+  }
+
+  .scroll-container::before,
+  .scroll-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .scroll-container::before {
+    left: 0;
+    background: linear-gradient(to right, hsl(var(--background)), transparent);
+  }
+
+  .scroll-container::after {
+    right: 0;
+    background: linear-gradient(to left, hsl(var(--background)), transparent);
+  }
 }
