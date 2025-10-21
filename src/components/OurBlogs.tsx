@@ -95,14 +95,14 @@ export const OurBlogs = () => {
           </p>
         </div>
 
-        {/* Horizontal Scrollable Layout */}
+        {/* Mobile-Optimized Horizontal Scrollable Layout */}
         <div className="scroll-container">
-          <div className="flex overflow-x-auto scrollbar-hide horizontal-scroll gap-6 pb-4 snap-x snap-mandatory">
+          <div className="flex overflow-x-auto scrollbar-hide horizontal-scroll gap-4 sm:gap-6 pb-4 snap-x snap-mandatory px-4 sm:px-0">
             {blogs.map((blog) => (
-              <div key={blog.id} className="horizontal-card">
+              <div key={blog.id} className="horizontal-card w-72 sm:w-80 md:w-96 flex-shrink-0">
                 <Card className="group bg-card border border-border/60 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 h-full">
                   {/* Image Section */}
-                  <div className="relative h-48 sm:h-56 overflow-hidden">
+                  <div className="relative h-40 sm:h-48 md:h-56 overflow-hidden">
                     <img
                       src={blog.image}
                       alt={blog.title}
@@ -114,63 +114,63 @@ export const OurBlogs = () => {
                         (e.currentTarget as HTMLImageElement).src = '/placeholder.svg';
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                     
                     {/* Category and Featured Badges */}
-                    <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
-                      <span className="px-3 py-1 text-xs font-semibold bg-primary text-primary-foreground rounded-full">
+                    <div className="absolute top-3 sm:top-4 left-3 sm:left-4 right-3 sm:right-4 flex justify-between items-start">
+                      <span className="px-2 sm:px-3 py-1 text-xs font-semibold bg-primary text-primary-foreground rounded-full">
                         {blog.category}
                       </span>
                       {blog.featured && (
-                        <span className="px-3 py-1 text-xs font-semibold bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-full animate-pulse">
+                        <span className="px-2 sm:px-3 py-1 text-xs font-semibold bg-gradient-to-r from-yellow-400 to-orange-400 text-white rounded-full animate-pulse">
                           Featured
                         </span>
                       )}
                     </div>
 
                     {/* Blog Title Overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4">
-                      <h3 className="text-lg sm:text-xl font-bold text-white mb-2 line-clamp-2">
+                    <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
+                      <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-1 sm:mb-2 line-clamp-2">
                         {blog.title}
                       </h3>
                     </div>
                   </div>
 
                   {/* Content Section */}
-                  <div className="p-4 sm:p-6">
+                  <div className="p-3 sm:p-4 md:p-6">
                     {/* Author and Date */}
-                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-3">
+                    <div className="flex items-center justify-between text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3">
                       <div className="flex items-center">
-                        <User className="h-4 w-4 mr-2 text-primary" />
-                        <span>{blog.author}</span>
+                        <User className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-primary flex-shrink-0" />
+                        <span className="truncate">{blog.author}</span>
                       </div>
                       <div className="flex items-center">
-                        <Calendar className="h-4 w-4 mr-1" />
-                        <span>{blog.date}</span>
+                        <Calendar className="h-3 w-3 sm:h-4 sm:w-4 mr-1 text-primary flex-shrink-0" />
+                        <span className="truncate">{blog.date}</span>
                       </div>
                     </div>
 
                     {/* Excerpt */}
-                    <p className="text-sm sm:text-base text-muted-foreground mb-4 line-clamp-3 leading-relaxed">
+                    <p className="text-xs sm:text-sm md:text-base text-muted-foreground mb-3 sm:mb-4 line-clamp-2 sm:line-clamp-3 leading-relaxed">
                       {blog.excerpt}
                     </p>
 
                     {/* Stats and Read More */}
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                      <div className="flex items-center space-x-3 sm:space-x-4 text-xs sm:text-sm text-muted-foreground">
                         <div className="flex items-center">
-                          <Clock className="h-4 w-4 mr-1" />
-                          <span>{blog.readTime}</span>
+                          <Clock className="h-3 w-3 sm:h-4 sm:w-4 mr-1 text-primary flex-shrink-0" />
+                          <span className="truncate">{blog.readTime}</span>
                         </div>
                         <div className="flex items-center">
-                          <Eye className="h-4 w-4 mr-1" />
-                          <span>{blog.views}</span>
+                          <Eye className="h-3 w-3 sm:h-4 sm:w-4 mr-1 text-primary flex-shrink-0" />
+                          <span className="truncate">{blog.views}</span>
                         </div>
                       </div>
                       
-                      <button className="btn-glass group/btn flex items-center space-x-2 px-4 py-2 text-sm font-semibold">
-                        <span>Read More</span>
-                        <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                      <button className="btn-glass group/btn flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold">
+                        <span>Read</span>
+                        <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
                       </button>
                     </div>
                   </div>
@@ -179,11 +179,16 @@ export const OurBlogs = () => {
             ))}
           </div>
           
-          {/* Scroll indicators */}
-          <div className="flex justify-center mt-6 space-x-2">
+          {/* Mobile-friendly scroll indicators */}
+          <div className="flex justify-center mt-4 sm:mt-6 space-x-1.5 sm:space-x-2">
             {blogs.map((_, index) => (
-              <div key={index} className="scroll-indicator w-2 h-2 bg-primary/30 rounded-full"></div>
+              <div key={index} className="scroll-indicator w-1.5 h-1.5 sm:w-2 sm:h-2 bg-primary/30 rounded-full"></div>
             ))}
+          </div>
+          
+          {/* Mobile scroll hint */}
+          <div className="text-center mt-3 sm:hidden">
+            <p className="mobile-scroll-hint">← Swipe to explore more blogs →</p>
           </div>
         </div>
       </div>

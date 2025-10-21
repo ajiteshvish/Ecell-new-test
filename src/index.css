@@ -961,4 +961,125 @@ All colors MUST be HSL.
     right: 0;
     background: linear-gradient(to left, hsl(var(--background)), transparent);
   }
+
+  /* Mobile-specific horizontal scroll improvements */
+  @media (max-width: 640px) {
+    .horizontal-card {
+      @apply w-72;
+      scroll-snap-align: start;
+    }
+    
+    .scroll-container {
+      @apply px-0;
+    }
+    
+    .scroll-container::before,
+    .scroll-container::after {
+      width: 15px;
+    }
+    
+    /* Better mobile touch scrolling */
+    .horizontal-scroll {
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      scroll-padding: 0 16px;
+    }
+    
+    /* Mobile card spacing */
+    .mobile-card-spacing {
+      @apply gap-4;
+    }
+    
+    /* Mobile text sizing */
+    .mobile-text-xs {
+      @apply text-xs;
+    }
+    
+    .mobile-text-sm {
+      @apply text-sm;
+    }
+    
+    /* Mobile button sizing */
+    .mobile-btn-small {
+      @apply px-2 py-1.5 text-xs;
+      min-height: 32px;
+    }
+    
+    /* Mobile icon sizing */
+    .mobile-icon-sm {
+      @apply h-3 w-3;
+    }
+    
+    .mobile-icon-md {
+      @apply h-4 w-4;
+    }
+    
+    /* Mobile padding adjustments */
+    .mobile-padding-sm {
+      @apply p-3;
+    }
+    
+    .mobile-padding-md {
+      @apply p-4;
+    }
+    
+    /* Mobile line clamp */
+    .mobile-line-clamp-1 {
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    .mobile-line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    
+    /* Mobile scroll hint styling */
+    .mobile-scroll-hint {
+      @apply text-xs text-muted-foreground opacity-75;
+      animation: fadeInOut 3s ease-in-out infinite;
+    }
+    
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+    
+    /* Better mobile card shadows */
+    .mobile-card-shadow {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .mobile-card-shadow:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  /* Tablet-specific improvements */
+  @media (min-width: 641px) and (max-width: 1023px) {
+    .horizontal-card {
+      @apply w-80;
+    }
+    
+    .scroll-container::before,
+    .scroll-container::after {
+      width: 20px;
+    }
+  }
+
+  /* Desktop-specific improvements */
+  @media (min-width: 1024px) {
+    .horizontal-card {
+      @apply w-96;
+    }
+    
+    .scroll-container::before,
+    .scroll-container::after {
+      width: 30px;
+    }
+  }
 }
